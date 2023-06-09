@@ -1,0 +1,128 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h1, h2 {
+        color: #333;
+        line-height: 1.6;
+    }
+
+    h1 {
+        padding: 10px 0;
+        border-bottom: 1px solid #333;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .info-box {
+        background-color: #eaeaea;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #333;
+        color: white;
+    }
+
+    .positive {
+        background-color: #cfffd3;
+    }
+
+    .negative {
+        background-color: #ffd3d3;
+    }
+
+    .neutral {
+        background-color: #ffffcc;
+    }
+
+    .date-width {
+        width: 10%;
+    }
+
+    .url-width {
+        width: 8%;
+    }
+
+    .No-width {
+        width: 5%;
+    }
+
+    .score-width {
+        width: 5%;
+    }
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>评分报告</h1>
+        <div class="info-box">
+            <h2>评分结果</h2>
+            <p>公司名称: {{company_name}}</p>
+            <p>上市代码: {{stock_code}}</p>
+            <p>总分: {{total_score}}</p>
+            <p>预测行情: {{predict_result}}</p>
+            <p>生成时间: {{generate_time}}</p>
+        </div>
+        <h2>详细信息</h2>
+        <table>
+            <tr>
+                <th class="No-width">编号</th>
+                <th>新闻标题</th>
+                <th>内容</th>
+                <th class="score-width">评分</th>
+                <th>评分理由</th>
+                <th class="date-width">日期</th>
+                <th class="url-width">新闻链接</th>
+            </tr>
+
+            {% for row in body %}
+            <tr class="{% if row.score > 0 %}positive{% elif row.score < 0 %}negative{% else %}neutral{% endif %}">
+                <td>{{ row.number }}</td>
+                <td>{{ row.title }}</td>
+                <td>{{ row.content }}</td>
+                <td>{{ row.score }}</td>
+                <td>{{ row.reason }}</td>
+                <td>{{ row.date }}</td>
+                <td><a href="{{ row.url }}">链接</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

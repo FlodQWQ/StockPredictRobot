@@ -1,0 +1,7 @@
+PyQt-Fluent-Widgets
+akshare
+pandas
+pyperclip
+selenium
+semantic_kernel
+jinja2
